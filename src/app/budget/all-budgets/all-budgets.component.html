@@ -1,0 +1,19 @@
+<div class=" m-5">
+
+    <div class="card-deck" *ngIf="budgetData">
+        <a [routerLink]="['/budget/budget-details' ] " [state]="{data:item.id}" class="card"
+            *ngFor="let item of budgetData.data.budgets">
+            <img src="assets/images/logo.svg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{item.name}}</h5>
+
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Last updated {{calculateDiff(item.last_modified_on)}} days ago</small>
+            </div>
+        </a>
+
+
+    </div>
+
+</div>

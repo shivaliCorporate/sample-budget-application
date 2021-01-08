@@ -1,0 +1,74 @@
+<div class="row m-3">
+    <div class="col-9">
+
+        <select name="my-select" [(ngModel)]="select" (change)="selectChange($event)">
+            <option [value]="item.month" *ngFor="let item of budgetMonths">
+                {{item.month}}
+            </option>
+        </select>
+
+
+
+
+        <div *ngIf="selectedMonth">
+            <div class="accordion" id="accordionExample">
+                <div class="card" *ngFor="let item of selectedMonth.categories | keyvalue">
+                    <div class="card-header" id="collapseOne_{{item.key}}">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                data-target="#collapseOne_{{item.key}}" aria-expanded="false"
+                                aria-controls="collapseOne_{{item.key}}">
+                                {{item.key}}
+                            </button>
+                        </h2>
+                    </div>
+
+                    <div id="collapseOne_{{item.key}}" class="collapse show" aria-labelledby="headingtwo"
+                        data-parent="#accordionExample">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Budgeted</th>
+                                        <th scope="col">Activity</th>
+                                        <th scope="col">AVAILABLE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let detail of item.value | keyvalue">
+                                        <th scope="row">{{detail.value.name}}</th>
+                                        <td>${{detail.value.budgeted /100}}</td>
+                                        <td>${{detail.value.activity/100}}</td>
+                                        <td>${{detail.value.balance/100}}</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="col-3 p-5">
+
+        <div class="text-center" *ngIf="selectedMonth">
+            <button class="btn btn-secondary" type="button" [routerLink]="['/budget/accounts' ] "
+                [state]="{data:budgetData}">Accounts</button>
+            <h5>TOTAL BUDGETED</h5>
+            <h3>${{selectedMonth.budgeted / 100}}</h3>
+            <h5>TOTAL ACTIVITY</h5>
+            <h3>${{selectedMonth.activity / 100}}</h3>
+            <h5>TOTAL AVAILABLE</h5>
+            <h3>${{(selectedMonth.income - selectedMonth.to_be_budgeted)/ 100}}</h3>
+            <h5>TOTAL INFLOWS</h5>
+            <h3>${{selectedMonth.income / 100}}</h3>
+        </div>
+    </div>
+</div>
