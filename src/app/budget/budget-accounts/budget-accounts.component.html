@@ -1,68 +1,98 @@
-<button type="button" class="btn btn-secondary m-2" data-toggle="modal" data-target="#exampleModal"
-    data-whatever="@mdo">
-    Add
-    Account</button>
-<div class="m-5">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Account</th>
-                <th scope="col">Date</th>
-                <th scope="col">Payee</th>
-                <th scope="col">MEMO</th>
-                <th scope="col">OUTFLOW</th>
-                <th scope="col">INFLOW</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let detail of transactions">
-                <th scope="row">{{detail.account_name}}</th>
-                <td>{{detail.date}}</td>
-                <td>{{detail.payee_name}}</td>
-                <td>{{detail.date}}</td>
-                <td>{{detail.payee_name}}</td>
-                <td>{{detail.date}}</td>
+<div class="row">
 
-
-            </tr>
-
-        </tbody>
-    </table>
-</div>
-
-
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">ADD NEW ACCOUNT</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+    <div class=" col-3 ">
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">Start Budget Management </div>
+            <div class="sidebar-heading" *ngIf="budgetData">Budget : {{budgetData.name }}</div>
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item list-group-item-action bg-light" [routerLink]="['budget']">
+                    BUDGETS</a>
+                <a href="#" *ngIf="budgetData" class="list-group-item list-group-item-action bg-light"
+                    [routerLink]="['/budget/accounts' ] " [state]="{data:budgetData}"
+                    [queryParams]="{data:budgetData.id}">
+                    ACCOUNTS</a>
+                <button type="button" class="btn btn-secondary m-2" data-toggle="modal" data-target="#exampleModal"
+                    data-whatever="@mdo">
+                    Add
+                    Account</button>
             </div>
-            <div class="modal-body">
-                <form [formGroup]="accountForm" (ngSubmit)="addAccount()">
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Account Type</label>
-                        <input type="text" class="form-control" formControlName="type" id="account-type">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Name</label>
-                        <input type="text" class="form-control" id="account-name" formControlName="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Balance</label>
-                        <input type="text" class="form-control" id="accopunt-balance" formControlName="balance">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" #closebutton data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add Account</button>
-                    </div>
-                </form>
-            </div>
-
         </div>
     </div>
-</div>
+    <div class="col-9 p-2">
+        <button type="button" class="btn btn-secondary m-2" data-toggle="modal" data-target="#exampleModal"
+            data-whatever="@mdo">
+            Add
+            Account</button>
+        <div class="m-5">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Account</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Payee</th>
+                        <th scope="col">MEMO</th>
+                        <th scope="col">OUTFLOW</th>
+                        <th scope="col">INFLOW</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let detail of transactions">
+                        <th scope="row">{{detail.account_name}}</th>
+                        <td>{{detail.date}}</td>
+                        <td>{{detail.payee_name}}</td>
+                        <td>{{detail.date}}</td>
+                        <td>{{detail.payee_name}}</td>
+                        <td>{{detail.date}}</td>
+
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">ADD NEW ACCOUNT</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="accountForm" (ngSubmit)="addAccount()">
+                        <div class="form-group">
+                            <label for="recipient-name">Account Type</label>
+                            <select class="form-control" id="type" formControlName="type">
+                                <option value="default">--Select a type--</option>
+                                <option *ngFor="let type of accountTypes" [ngValue]="type">{{type}}</option>
+                            </select>
+
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Name</label>
+                            <input type="text" class="form-control" id="account-name" formControlName="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Balance</label>
+                            <input type="text" class="form-control" id="accopunt-balance" formControlName="balance">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" #closebutton
+                                data-dismiss="modal">Close</button>
+                            <button type="submit" [disabled]="accountForm.invalid" class="btn btn-primary">Add
+                                Account</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { BudgetDetails } from '../models/budget-details.model';
 import { BudgetMonth } from '../models/budget-month.model';
 import { BudgetService } from '../services/budget.service';
@@ -13,30 +14,38 @@ export class BudgetDetailsComponent implements OnInit {
   public budgetData: any;
   public budgetMonths: any;
   public selectedMonth: any;
-  public select: any = '2021-02-01';
+  public select: any;
 
 
-  constructor(private budgetService: BudgetService,) { }
+  constructor(private budgetService: BudgetService, private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
-    this.budgetService.getBudgetData(history.state.data).subscribe((data: BudgetDetails) => {
-      this.budgetData = data.budget;
-      this.budgetMonths = this.budgetData.months;
+    this.route.queryParams.subscribe(
+      (queryParams: Params) => {
+        this.budgetService.getBudgetData(queryParams['data']).subscribe((data: BudgetDetails) => {
+          this.budgetData = data.budget;
+          this.budgetMonths = this.budgetData.months;
+          this.select = this.budgetMonths[0].month;
 
-      this.budgetData.months.forEach((element: any) => {
-        var result = element.categories.reduce(function (r: any, a: any) {
-          r[a.category_grp_name] = r[a.category_grp_name] || [];
-          r[a.category_grp_name].push(a);
-          return r;
-        }, {});
+          this.budgetData.months.forEach((element: any) => {
+            var result = element.categories.reduce(function (r: any, a: any) {
+              r[a.category_grp_name] = r[a.category_grp_name] || [];
+              r[a.category_grp_name].push(a);
+              return r;
+            }, {});
 
 
-        const mapped = Object.keys(result).map(key => ({ type: key, value: result[key] }));
+            const mapped = Object.keys(result).map(key => ({ type: key, value: result[key] }));
 
-        element.categories = mapped;
-      });
-      this.selectChange(this.select);
-    })
+            element.categories = mapped;
+          });
+          this.selectChange(this.select);
+        })
+
+      }
+    );
+
+
 
   }
 

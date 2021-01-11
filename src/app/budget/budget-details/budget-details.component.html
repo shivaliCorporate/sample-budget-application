@@ -1,7 +1,23 @@
-<div class="row m-3">
-    <div class="col-9">
+<div class="row">
 
-        <select name="my-select" [(ngModel)]="select" (change)="selectChange($event)">
+    <div class=" col-3 ">
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">Start Budget Management </div>
+            <div class="sidebar-heading" *ngIf="budgetData">Budget : {{budgetData.name }}</div>
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item list-group-item-action bg-light" [routerLink]="['budget']">
+                    BUDGETS</a>
+                <a href="#" *ngIf="budgetData" class="list-group-item list-group-item-action bg-light"
+                    [routerLink]="['/budget/accounts' ] " [state]="{data:budgetData}"
+                    [queryParams]="{data:budgetData.id}">
+                    ACCOUNTS</a>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-6 p-2">
+        <h3 *ngIf="budgetData">Budget : {{budgetData.name}}</h3>
+        <select name="my-select" class="p-2 m-2" [(ngModel)]="select" (change)="selectChange($event)">
             <option [value]="item.month" *ngFor="let item of budgetMonths">
                 {{item.month}}
             </option>
@@ -28,18 +44,18 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="col">Category</th>
-                                    <th scope="col">Budgeted</th>
-                                    <th scope="col">Activity</th>
-                                    <th scope="col">AVAILABLE</th>
+                                    <th scope="col" class="w-25">Category</th>
+                                    <th scope="col" class="w-25">Budgeted</th>
+                                    <th scope="col" class="w-25">Activity</th>
+                                    <th scope="col" class="w-25">AVAILABLE</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let detail of item.value">
-                                    <th scope="row">{{detail.name}}</th>
-                                    <td>${{detail.budgeted /100}}</td>
-                                    <td>${{detail.activity/100}}</td>
-                                    <td>${{detail.balance/100}}</td>
+                                    <th class="w-25" scope="row">{{detail.name}}</th>
+                                    <td class="w-25">${{detail.budgeted /100}}</td>
+                                    <td class="w-25">${{detail.activity/100}}</td>
+                                    <td class="w-25">${{detail.balance/100}}</td>
                                 </tr>
 
                             </tbody>
@@ -56,18 +72,20 @@
 
     </div>
     <div class="col-3 p-5">
+        <div class="bg-light border-right" id="sidebar-wrapper">
 
-        <div class="text-center" *ngIf="selectedMonth">
-            <button class="btn btn-secondary" type="button" [routerLink]="['/budget/accounts' ] "
-                [state]="{data:budgetData}">Accounts</button>
-            <h5>TOTAL BUDGETED</h5>
-            <h3>${{selectedMonth.budgeted / 100}}</h3>
-            <h5>TOTAL ACTIVITY</h5>
-            <h3>${{selectedMonth.activity / 100}}</h3>
-            <h5>TOTAL AVAILABLE</h5>
-            <h3>${{(selectedMonth.income - selectedMonth.to_be_budgeted)/ 100}}</h3>
-            <h5>TOTAL INFLOWS</h5>
-            <h3>${{selectedMonth.income / 100}}</h3>
+
+            <h5 class="sidebar-heading">TOTAL BUDGETED : ${{selectedMonth.budgeted / 100}}</h5>
+            <hr class="m-3">
+            <h5 class="sidebar-heading">TOTAL ACTIVITY : ${{selectedMonth.activity / 100}}</h5>
+            <hr class="m-3">
+            <h5 class="sidebar-heading">TOTAL AVAILABLE : ${{(selectedMonth.income - selectedMonth.to_be_budgeted)/
+                100}}</h5>
+            <hr class="m-3">
+            <h5 class="sidebar-heading">TOTAL INFLOWS : ${{selectedMonth.income / 100}}</h5>
+
         </div>
+
+
     </div>
 </div>

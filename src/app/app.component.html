@@ -1,10 +1,15 @@
-<div class="container">
-  <nav class="navbar navbar-light navbar-dark bg-primary">
+<div class="row w-100">
+
+
+
+  <nav class="navbar navbar-light navbar-dark bg-primary w-100">
     <a class="navbar-brand" href="#">
       <img src="assets/images/logo.svg" width="30" height="30" class="d-inline-block align-top" alt="">
       Budget Management
     </a>
     <button class="btn btn-secondary" type="button" [routerLink]="['budget']">Budgets</button>
   </nav>
-  <router-outlet></router-outlet>
+
 </div>
+
+<router-outlet></router-outlet>
