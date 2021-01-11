@@ -3,8 +3,19 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.5.
 
 ## Development server
+Install dependancies:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+    npm install
+
+Open environment file
+
+    cd src\environments\environment.ts
+
+And paste your keys in the correct spot.
+
+    api_key : AABBCCDDEEFF00112233445566778899
+
+Now Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
