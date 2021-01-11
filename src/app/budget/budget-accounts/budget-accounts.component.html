@@ -5,7 +5,7 @@
             <div class="sidebar-heading">Start Budget Management </div>
             <div class="sidebar-heading" *ngIf="budgetData">Budget : {{budgetData.name }}</div>
             <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action bg-light" [routerLink]="['budget']">
+                <a href="#" class="list-group-item list-group-item-action bg-light" [routerLink]="['/budget']">
                     BUDGETS</a>
                 <a href="#" *ngIf="budgetData" class="list-group-item list-group-item-action bg-light"
                     [routerLink]="['/budget/accounts' ] " [state]="{data:budgetData}"
