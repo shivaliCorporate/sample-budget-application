@@ -10,43 +10,43 @@
 
 
 
-        <div *ngIf="selectedMonth">
-            <div class="accordion" id="accordionExample">
-                <div class="card" *ngFor="let item of selectedMonth.categories">
-                    <div class="card-header" id="collapseOne">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                                aria-expanded="false" aria-controls="collapseOne">
-                                {{item.type}}
-                            </button>
-                        </h2>
-                    </div>
+        <div *ngIf="selectedMonth" class="accordion" id="accordionExample">
+            <div class="card" *ngFor="let item of selectedMonth.categories ; index as i">
 
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingtwo"
-                        data-parent="#accordionExample">
-                        <div class="card-body">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Category</th>
-                                        <th scope="col">Budgeted</th>
-                                        <th scope="col">Activity</th>
-                                        <th scope="col">AVAILABLE</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let detail of item.value">
-                                        <th scope="row">{{detail.name}}</th>
-                                        <td>${{detail.budgeted /100}}</td>
-                                        <td>${{detail.activity/100}}</td>
-                                        <td>${{detail.balance/100}}</td>
-                                    </tr>
 
-                                </tbody>
-                            </table>
-                        </div>
+                <div class="card-header">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse"
+                            attr.data-target="#collapse_{{i}}" aria-expanded="false">
+                            {{item.type}}
+                        </button>
+                    </h2>
+                </div>
+
+                <div id="collapse_{{i}}" class="collapse" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Budgeted</th>
+                                    <th scope="col">Activity</th>
+                                    <th scope="col">AVAILABLE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let detail of item.value">
+                                    <th scope="row">{{detail.name}}</th>
+                                    <td>${{detail.budgeted /100}}</td>
+                                    <td>${{detail.activity/100}}</td>
+                                    <td>${{detail.balance/100}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+
 
 
             </div>
