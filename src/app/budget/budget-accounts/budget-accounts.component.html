@@ -43,25 +43,26 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form [formGroup]="accountForm" (ngSubmit)="addAccount()">
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Account Type</label>
-                        <input type="text" class="form-control" id="account-type">
+                        <input type="text" class="form-control" formControlName="type" id="account-type">
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Name</label>
-                        <input type="text" class="form-control" id="account-name">
+                        <input type="text" class="form-control" id="account-name" formControlName="name">
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Balance</label>
-                        <input type="text" class="form-control" id="accopunt-balance">
+                        <input type="text" class="form-control" id="accopunt-balance" formControlName="balance">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add Account</button>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" (click)="addAccount()">Add Account</button>
-            </div>
+
         </div>
     </div>
 </div>

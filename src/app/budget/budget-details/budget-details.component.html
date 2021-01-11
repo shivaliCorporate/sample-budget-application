@@ -12,18 +12,17 @@
 
         <div *ngIf="selectedMonth">
             <div class="accordion" id="accordionExample">
-                <div class="card" *ngFor="let item of selectedMonth.categories | keyvalue">
-                    <div class="card-header" id="collapseOne_{{item.key}}">
+                <div class="card" *ngFor="let item of selectedMonth.categories">
+                    <div class="card-header" id="collapseOne">
                         <h2 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse"
-                                data-target="#collapseOne_{{item.key}}" aria-expanded="false"
-                                aria-controls="collapseOne_{{item.key}}">
-                                {{item.key}}
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="false" aria-controls="collapseOne">
+                                {{item.type}}
                             </button>
                         </h2>
                     </div>
 
-                    <div id="collapseOne_{{item.key}}" class="collapse show" aria-labelledby="headingtwo"
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingtwo"
                         data-parent="#accordionExample">
                         <div class="card-body">
                             <table class="table table-striped">
@@ -36,11 +35,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let detail of item.value | keyvalue">
-                                        <th scope="row">{{detail.value.name}}</th>
-                                        <td>${{detail.value.budgeted /100}}</td>
-                                        <td>${{detail.value.activity/100}}</td>
-                                        <td>${{detail.value.balance/100}}</td>
+                                    <tr *ngFor="let detail of item.value">
+                                        <th scope="row">{{detail.name}}</th>
+                                        <td>${{detail.budgeted /100}}</td>
+                                        <td>${{detail.activity/100}}</td>
+                                        <td>${{detail.balance/100}}</td>
                                     </tr>
 
                                 </tbody>

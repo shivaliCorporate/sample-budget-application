@@ -10,11 +10,4 @@ export class AuthenticationService {
   public getToken(): any {
     return localStorage.getItem('token');
   }
-
-  // public isAuthenticated(): boolean {
-  //   // get the token
-  //   const token = this.getToken();
-  //   // return a boolean indicating whether or not the token is expired
-  //   if (token) return true; else return false;
-  // }
 }

@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Budgets } from '../models/budget.model';
+import { BudgetDetails } from '../models/budget-details.model';
 
 interface Account {
   name: string;
@@ -25,22 +27,23 @@ export class BudgetService {
 
   constructor(private http: HttpClient) { }
 
-  getTotalBudgets() {
+  getTotalBudgets(): Observable<Budgets> {
     return this.http
-      .get(this.totalBudgetsUrl);
+      .get<Budgets>(this.totalBudgetsUrl);
 
   }
 
   getBudgetData(budgetId: any) {
     return this.http
       .get(`${this.budgetsUrl}/${budgetId}`).pipe(map(res => {
-        console.log(res)
+
         return this.modelMapper(res);
       }))
 
 
   }
   modelMapper(res: any) {
+
     res.data.budget.months.forEach((month: any) => {
       month.categories.forEach((cat: any) => {
         res.data.budget.category_groups.forEach((cat_group: any) => {
@@ -64,17 +67,9 @@ export class BudgetService {
         }
       });
 
-      //   // res.data.budget.payees.forEach((payees: any) => {
-      //   //   if (trans.payee_id == payees.id) {
-      //   //     trans.payee_name = payees.name;
-      //   //   }
-      //   // });
-      //   // if (res.data.budget.category_groups.id.includes(cat.category_group_id)) {
-      //   //   cat.category_group_name = res.data.budget.category_groups.id.indexOf(cat.category_group_id)
-      //   // }
-
     });
-    return res
+    var budgetdata = new BudgetDetails(res.data.budget, 0);
+    return budgetdata;
   }
 
   addAccount(id: string, event: Account): Observable<Account> {

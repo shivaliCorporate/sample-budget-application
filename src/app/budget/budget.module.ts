@@ -6,7 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BudgetRoutingModule } from './budget-routing.module';
 import { AllBudgetsComponent } from './all-budgets/all-budgets.component';
 import { BudgetAccountsComponent } from './budget-accounts/budget-accounts.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +15,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     BudgetRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
 
   ]
 })
