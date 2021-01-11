@@ -15,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let detail of budgetData.transactions">
+            <tr *ngFor="let detail of transactions">
                 <th scope="row">{{detail.account_name}}</th>
                 <td>{{detail.date}}</td>
                 <td>{{detail.payee_name}}</td>
@@ -57,7 +57,7 @@
                         <input type="text" class="form-control" id="accopunt-balance" formControlName="balance">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" #closebutton data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Add Account</button>
                     </div>
                 </form>

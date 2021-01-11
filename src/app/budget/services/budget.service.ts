@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { Budgets } from '../models/budget.model';
 import { BudgetDetails } from '../models/budget-details.model';
+import { AccountDetails } from '../models/budget-account.model'
 
 interface Account {
   name: string;
@@ -22,6 +23,7 @@ export class BudgetService {
   private totalBudgetsUrl = 'https://api.youneedabudget.com/v1/budgets';
   private budgetsUrl = 'https://api.youneedabudget.com/v1/budgets/';
 
+  public activeProject: ReplaySubject<any> = new ReplaySubject(1);
 
 
 
@@ -69,10 +71,25 @@ export class BudgetService {
 
     });
     var budgetdata = new BudgetDetails(res.data.budget, 0);
+    this.fetchAccounts(budgetdata);
     return budgetdata;
   }
 
-  addAccount(id: string, event: Account): Observable<Account> {
-    return this.http.post<Account>(`${this.totalBudgetsUrl}/${id}/accounts`, { account: event });
+  addAccount(id: string, event: Account): Observable<AccountDetails> {
+    return this.http.post<any>(`${this.totalBudgetsUrl}/${id}/accounts`, { account: event });
+  }
+
+  fetchAccounts(budgetdata: BudgetDetails) {
+    this.activeProject.next(budgetdata.budget.transactions);
+  }
+
+  getTransactions(budgetId: any) {
+    return this.http
+      .get(`${this.totalBudgetsUrl}/${budgetId}/transactions`).pipe(map(res => {
+
+        return res;
+      }))
+
+
   }
 }
