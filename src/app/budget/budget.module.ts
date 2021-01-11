@@ -7,11 +7,12 @@ import { BudgetRoutingModule } from './budget-routing.module';
 import { AllBudgetsComponent } from './all-budgets/all-budgets.component';
 import { BudgetAccountsComponent } from './budget-accounts/budget-accounts.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PayeeTransacionsComponent } from './payee-transacions/payee-transacions.component';
 
 
 
 @NgModule({
-  declarations: [BudgetDetailsComponent, AllBudgetsComponent, BudgetAccountsComponent],
+  declarations: [BudgetDetailsComponent, AllBudgetsComponent, BudgetAccountsComponent, PayeeTransacionsComponent],
   imports: [
     CommonModule,
     BudgetRoutingModule,

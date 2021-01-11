@@ -39,8 +39,12 @@
                     <tr *ngFor="let detail of transactions">
                         <th scope="row">{{detail.account_name}}</th>
                         <td>{{detail.date}}</td>
-                        <td>{{detail.payee_name}}</td>
-                        <td>{{detail.date}}</td>
+                        <td><a href="#" *ngIf="budgetData" [routerLink]="['/budget/payees' ] "
+                                [state]="{data:budgetData}"
+                                [queryParams]="{budgetid:budgetData.id, payeeid : detail.payee_id}">
+                                {{detail.payee_name}}</a></td>
+
+                        <td>{{detail.memo}}</td>
                         <td>{{detail.payee_name}}</td>
                         <td>{{detail.date}}</td>
 

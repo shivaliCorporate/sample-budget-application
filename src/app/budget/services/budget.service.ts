@@ -92,4 +92,12 @@ export class BudgetService {
 
 
   }
+
+  getPayeeTransactions(budgetId: string, payeeId: string) {
+    return this.http
+      .get(`${this.totalBudgetsUrl}/${budgetId}/payees/${payeeId}/transactions`).pipe(map(res => {
+
+        return res;
+      }))
+  }
 }

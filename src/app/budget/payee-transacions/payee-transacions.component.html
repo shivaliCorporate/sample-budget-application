@@ -1,0 +1,46 @@
+<div class="row">
+
+    <div class=" col-3 ">
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">Start Budget Management </div>
+
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item list-group-item-action bg-light" [routerLink]="['/budget']">
+                    BUDGETS</a>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-9 p-2">
+
+        <div class="m-5">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Account</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Payee</th>
+                        <th scope="col">MEMO</th>
+                        <th scope="col">OUTFLOW</th>
+                        <th scope="col">INFLOW</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let detail of transactions">
+                        <th scope="row">{{detail.account_name}}</th>
+                        <td>{{detail.date}}</td>
+                        <td>
+                            {{detail.payee_name}}</td>
+
+                        <td>{{detail.memo}}</td>
+                        <td>{{detail.payee_name}}</td>
+                        <td>{{detail.date}}</td>
+
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>

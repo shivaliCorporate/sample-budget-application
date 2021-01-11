@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AllBudgetsComponent } from './all-budgets/all-budgets.component';
 import { BudgetAccountsComponent } from './budget-accounts/budget-accounts.component';
 import { BudgetDetailsComponent } from './budget-details/budget-details.component';
+import { PayeeTransacionsComponent } from './payee-transacions/payee-transacions.component';
 
 
 
@@ -26,6 +27,11 @@ const routes: Routes = [
       {
         path: 'accounts',
         component: BudgetAccountsComponent
+
+      },
+      {
+        path: 'payees',
+        component: PayeeTransacionsComponent
 
       }
     ]

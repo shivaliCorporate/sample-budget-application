@@ -72,7 +72,7 @@
 
     </div>
     <div class="col-3 p-5">
-        <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="bg-light border-right" id="sidebar-wrapper" *ngIf="selectedMonth">
 
 
             <h5 class="sidebar-heading">TOTAL BUDGETED : ${{selectedMonth.budgeted / 100}}</h5>
