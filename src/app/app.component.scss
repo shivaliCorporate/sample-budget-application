@@ -30,17 +30,18 @@
   margin-left: 0;
 }
 
-@media (min-width: 768px) {
-  #sidebar-wrapper {
-    margin-left: 0;
-  }
 
-  #page-content-wrapper {
-    min-width: 0;
-    width: 100%;
-  }
 
-  #wrapper.toggled #sidebar-wrapper {
-    margin-left: -15rem;
-  }
+.h120{
+    height: 120px;
+}
+
+.budget-header{
+    font-family: "Oxygen", Arial, Helvetica, sans-serif;
+    font-size: 25px;
+}
+
+.budget-container{
+    font-family: "Oxygen", Arial, Helvetica, sans-serif;
+    font-size: 15px;
 }
